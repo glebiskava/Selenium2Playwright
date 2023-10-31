@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: white;
+}
+
+h1 {
+    color: black;
+}
+
+.btn {
+    display: inline-block;
+    color: white;
+    background: green;
+    min-width: 5rem;
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: red;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+header {
+    text-align: center;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    min-height: 400px;
+}
+
+main > div {
+    background: orange;
+}
+
+.form-element{
+    background: yellow;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.form-element *{
+    display: incline;
+    margin: 10px;
+	vertical-align: middle;
+}
+#addParam {
+    display: none;
+}
+
+#rm {
+    display: none;
+}
+
+#src {
+    padding: 10px;
+}
+
+#h-file,
+#c-file {
+    height: 50%;
+}
+
+#ioOut {
+    display: none;
+}
+
+#unitOut {
+    display: none;
+}

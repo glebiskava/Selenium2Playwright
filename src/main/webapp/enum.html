@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>C Tutor - Aufz&auml;hlungstyp (Enumeration)</title>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1 id="titleHeader">C Tutor - Aufz&auml;hlungstyp (Enumeration)</h1>
+        <a id="docLink"  href="https://en.cppreference.com/w/c/language/enum">Dokumentation - C reference / enumerations</a>
+    </header>
+    <main>
+
+        <div id="config">
+            <form>
+                <!-- Enter enumname and description -->
+                <div class="form-element">
+                    <label for="enumName">Name Aufz&auml;hlungstyp:</label>
+                    <input type="text" name="enumName" id="enumName" onkeyup="changeEnumName()">
+                    <label for="enumDesc">Beschreibung Aufz&auml;hlungstyp:</label>
+                    <textarea name="enumDescIn" id="enumDescIn" onkeyup="changeEnumDesc()" cols="40"></textarea>
+                </div>
+                <!-- Enter enum integer constants -->
+                <div class="form-element">
+                    <!-- Add constant -->
+                    <div id="defineConst">
+                        <label for="constName">Name des Enumerators:</label>
+                        <input type="text" name="constName" id="constName">
+                        <br>
+                        <label for="constValue">ganzzahliger Enumerator-Wert (optional):</label>
+                        <input type="text" name="constValue" id="constValue"><br>
+                    </div>
+                </div>
+                <div class="form-element">
+                    <button type="button" class="btn" id="add_const" onclick="addConst()">Enumerator hinzufügen</button>
+                    <!-- Remove constant -->
+                    <div id="rm">
+                        <label for="ConstList">Liste der Enumeratoren:</label>
+                        <select name="ConstList" id="ConstList"></select>
+                        <button type="button" class="btn" id="rm_const-btn" onclick="rmConst()">Enumerator entfernen</button>
+                    </div>
+                </div>
+                <!-- Copy generated code -->
+                <div class="form-element">
+                    <button type="button" class="btn" id="copy-btn" onclick="copy()">In Zwischenablage kopieren</button>
+                </div>
+            </form>
+        </div>
+        <div id="src">
+            /** <br>
+            &nbsp;* \enum <span id="enumNameOut">Name Aufz&auml;hlungstyp</span> <br>
+            &nbsp;* \brief <span id="enumDescOut">Beschreibung Aufz&auml;hlungstyp</span> <br>
+            &nbsp;*/ <br>
+
+            typedef enum
+            {<br>
+            <span id="constantsSpan">&nbsp;enumeratoren<br></span>
+            } <span id="enumerationNameSpan">EnumName</span>;
+        </div>
+    </main>
+</div>
+<script src="enum.js"></script>
+</body>
+</html>
