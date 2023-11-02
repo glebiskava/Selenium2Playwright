@@ -54,20 +54,6 @@ public class AbstractPlaywrightTester {
 	void createContextAndPage() {
 		context = browser.newContext();
 		page = context.newPage();
-
-		// String projectDirectory = null;
-		// String os = System.getProperty("os.name").toLowerCase();
-		// if (os.contains("win")) {
-		// 	projectDirectory = System.getProperty("user.dir");
-		// } else if (os.contains("os")) {
-		// 	Path path = Paths.get("");
-		// 	projectDirectory = path.toAbsolutePath().toString();
-		// }
-		// String file = "file:///";
-        //Change if Linux
-		// String website = "src/main/webapp/enum.html";
-		// String url = file + projectDirectory + website;
-		// page.navigate(url);
 	}
 
 	@AfterEach

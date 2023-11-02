@@ -76,15 +76,11 @@ public class CTutorEnumPage extends AbstractPage {
         rm_enum.click();
     }
 
-    // public void selectEnumerator(String name) {
-    //     selectComboboxItem("ConstList", name);
-    // }
-
     public void clickButtonCopyToClipboard() {
         copy_btn.click();
     }
 
-    // /* typing events */
+    /* typing events */
 
     public void setEnumName(String name) {
         enum_name.fill(name);
@@ -109,18 +105,7 @@ public class CTutorEnumPage extends AbstractPage {
         if(value != null) enumerator_value_in.fill(value);
     }
 
-    // /* accessing data */
-    // public String getHeader() {
-    //     return this.getTextById("titleHeader");
-    // }
-
-    // public String getHeader2() {
-    //     return getTextByTagName("h1");
-    // }
-
-    // public String getHeader3() {
-    //     return getTextByCssSelector("h1");
-    // }
+    /* getters */
 
     public String getEnumNameInComment() {
         return comment_enum_name_out.textContent();
@@ -130,29 +115,27 @@ public class CTutorEnumPage extends AbstractPage {
         return def_enum_name_out.textContent();
     }
 
-    public void refreshEnumName(){
-        page.evaluate("changeEnumName()");
-    }
-
-    public void refreshEnumDesc(){
-        page.evaluate("changeEnumDesc()");
-    }
-
     public String getEnumeratorInDef() {
         return enumerator_out.innerHTML();
     }
-
-    // public String getDescription() {
-    //     return getTextById("enumDescOut");
-    // }
-
+    
     public String getDescriptionAsHTML() {
         return comment_enum_desc_out.innerHTML();
     }
-
+    
     public String getFirstEnumeratorInCombobox() {
         return combobox.locator("option").textContent();
     }
+    
+    public String getColorOfAddEnumeratorButton() {
+        return add_enum.evaluate("(el) => {return window.getComputedStyle(el).getPropertyValue('background-color');}").toString();
+    }
+
+    public String getDialogText() {
+        return dialogText;
+    }
+
+    /* ui checks */
 
     public boolean buttonRemoveEnumeratorVisisble() {
         return rm_enum.isVisible();
@@ -161,12 +144,14 @@ public class CTutorEnumPage extends AbstractPage {
     public void MouseOverAddEnumeratorButton() {
         add_enum.hover();
     }
+    
+    /* js calls */
 
-    public String getColorOfAddEnumeratorButton() {
-        return add_enum.evaluate("(el) => {return window.getComputedStyle(el).getPropertyValue('background-color');}").toString();
+    public void refreshEnumName(){
+        page.evaluate("changeEnumName()");
     }
 
-    public String getDialogText() {
-        return dialogText;
+    public void refreshEnumDesc(){
+        page.evaluate("changeEnumDesc()");
     }
 }
