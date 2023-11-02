@@ -4,13 +4,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>htwsaar</groupId>
-  <artifactId>Playwright_Hello_World</artifactId>
+  <groupId>Loescher-Mittelberger</groupId>
+  <artifactId>C-Tutor_Enum_Test</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>PlaywrightHelloWorld</name>
-  <url>http://www.htwsaar.de</url>
-
+  <name>C-Tutor Enum Test</name>
+  <url>http://www.lessables4l.site</url>
+  <!-- ;) -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -34,7 +34,7 @@
     <dependency>
       <groupId>com.microsoft.playwright</groupId>
       <artifactId>playwright</artifactId>
-      <version>1.38.0</version>
+      <version>1.39.0</version>
     </dependency>
       <dependency>
           <groupId>org.junit.jupiter</groupId>

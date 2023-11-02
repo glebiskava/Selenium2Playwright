@@ -1,118 +1,172 @@
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 public class CTutorEnumPage extends AbstractPage {
 
+    private final Locator doc_link1;
+    private final Locator doc_link2;
+    private final Locator doc_link3;
+    private final Locator enum_name;
+    private final Locator desc_enum;
+    private final Locator desc_enum2;
+    private final Locator add_enum;
+    private final Locator rm_enum;
+    private final Locator comment_enum_name_out;
+    private final Locator comment_enum_desc_out;
+    private final Locator def_enum_name_out;
+    private final Locator enumerator_name_in;
+    private final Locator enumerator_value_in;
+    private final Locator enumerator_out;
+    private final Locator combobox;
+    private final Locator copy_btn;
+    private String dialogText;
+
     protected CTutorEnumPage(Page page) {
         super(page);
+        this.doc_link1 = page.locator("#docLink");
+        this.doc_link2 = page.getByText("Dokumentation - C reference / enumerations");
+        this.doc_link3 = page.locator("//a[. = 'Dokumentation - C reference / enumerations']");
+        this.enum_name = page.locator("#enumName");
+        this.desc_enum = page.locator("#enumDescIn");
+        this.desc_enum2 = page.locator("textarea");
+        this.add_enum = page.locator("#add_const");
+        this.rm_enum = page.locator("#rm_const-btn");
+        this.comment_enum_name_out = page.locator("#enumNameOut");
+        this.comment_enum_desc_out = page.locator("#enumDescOut");
+        this.def_enum_name_out = page.locator("#enumerationNameSpan");
+        this.enumerator_name_in = page.locator("#constName");
+        this.enumerator_value_in = page.locator("#constValue");
+        this.combobox = page.locator("#ConstList");
+        this.enumerator_out = page.locator("#constantsSpan");
+        this.copy_btn = page.locator("#copy-btn");
+        page.onDialog(dialog -> {
+            this.dialogText = dialog.message();
+            dialog.accept();
+        }); //for Alert when enum name empty
     }
 
     public void open() {
         String projectDirectory = System.getProperty("user.dir");
-        String url = "file://" + projectDirectory + "/src/main/webapp/enum.html";
-        call(url);
+        String url = "file:///" + projectDirectory + "/src/main/webapp/enum.html";
+        page.navigate(url);
     }
 
     /* click events */
 
-    public EnumerationsPageCReference clickEnumLink0() {
-        click("docLink");
+    public EnumerationsPageCReference clickEnumLink1() {
+        doc_link1.click();
         return new EnumerationsPageCReference(page);
     }
 
     public EnumerationsPageCReference clickEnumLink2() {
-        clickLink();
+        doc_link2.click();
         return new EnumerationsPageCReference(page);
     }
 
     public EnumerationsPageCReference clickEnumLink3() {
-        clickLinkByXPath();
+        doc_link3.click();
         return new EnumerationsPageCReference(page);
     }
 
     public void clickButtonAddEnumerator() {
-        click("add_const");
+        add_enum.click();
     }
 
     public void clickButtonRemoveEnumerator() {
-        click("rm_const");
+        rm_enum.click();
     }
 
-    public void selectEnumerator(String name) {
-        selectComboboxItem("ConstList", name);
-    }
+    // public void selectEnumerator(String name) {
+    //     selectComboboxItem("ConstList", name);
+    // }
 
     public void clickButtonCopyToClipboard() {
-        click("copy-btn");
+        copy_btn.click();
     }
 
-    /* typing events */
+    // /* typing events */
 
     public void setEnumName(String name) {
-        typeText("enumName", name);
+        enum_name.fill(name);
+        refreshEnumName();
     }
 
     public void setDescription(String description) {
-        typeText("enumDescIn", description);
+        desc_enum.fill(description);
+        refreshEnumDesc();
     }
 
     public void setDescription2(String description) {
-        this.typeText("textarea", description);
+        desc_enum2.fill(description);
+        refreshEnumDesc();
     }
 
     public void setEnumeratorName(String name) {
-        typeText("constName", name);
+        if(name != null) enumerator_name_in.fill(name);
     }
 
     public void setEnumeratorValue(String value) {
-        typeText("constValue", value);
+        if(value != null) enumerator_value_in.fill(value);
     }
 
-    /* accessing data */
-    public String getHeader() {
-        return this.getTextById("titleHeader");
-    }
+    // /* accessing data */
+    // public String getHeader() {
+    //     return this.getTextById("titleHeader");
+    // }
 
-    public String getHeader2() {
-        return getTextByTagName("h1");
-    }
+    // public String getHeader2() {
+    //     return getTextByTagName("h1");
+    // }
 
-    public String getHeader3() {
-        return getTextByCssSelector("h1");
-    }
+    // public String getHeader3() {
+    //     return getTextByCssSelector("h1");
+    // }
 
     public String getEnumNameInComment() {
-        return getTextById("enumNameOut");
+        return comment_enum_name_out.textContent();
     }
 
     public String getEnumNameInDefinition() {
-        return getTextById("enumerationNameSpan");
+        return def_enum_name_out.textContent();
+    }
+
+    public void refreshEnumName(){
+        page.evaluate("changeEnumName()");
+    }
+
+    public void refreshEnumDesc(){
+        page.evaluate("changeEnumDesc()");
     }
 
     public String getEnumeratorInDef() {
-        return getInnerHTMLOfElementByID("constantsSpan");
+        return enumerator_out.innerHTML();
     }
 
-    public String getDescription() {
-        return getTextById("enumDescOut");
-    }
+    // public String getDescription() {
+    //     return getTextById("enumDescOut");
+    // }
 
     public String getDescriptionAsHTML() {
-        return getInnerHTMLOfElementByID("enumDescOut");
+        return comment_enum_desc_out.innerHTML();
     }
 
     public String getFirstEnumeratorInCombobox() {
-        return this.getComboBoxItems("ConstList");
+        return combobox.locator("option").textContent();
     }
 
     public boolean buttonRemoveEnumeratorVisisble() {
-        return isVisible("rm_const-btn");
+        return rm_enum.isVisible();
     }
 
     public void MouseOverAddEnumeratorButton() {
-        moveOverHTMLelement("copy-btn");
+        add_enum.hover();
     }
 
     public String getColorOfAddEnumeratorButton() {
-        return getColorofHTMLElement("copy-btn");
+        return add_enum.evaluate("(el) => {return window.getComputedStyle(el).getPropertyValue('background-color');}").toString();
+    }
+
+    public String getDialogText() {
+        return dialogText;
     }
 }

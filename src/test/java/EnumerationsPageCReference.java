@@ -7,4 +7,8 @@ public class EnumerationsPageCReference extends AbstractPage {
         String currentURL = page.url();
         System.out.println("Enumerations Page C Reference URL: " + currentURL);
     }
+
+    protected String title(){
+        return page.title();
+    }
 }
