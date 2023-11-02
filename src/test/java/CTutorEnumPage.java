@@ -8,7 +8,7 @@ public class CTutorEnumPage extends AbstractPage {
 
     public void open() {
         String projectDirectory = System.getProperty("user.dir");
-        String url = "file://" + projectDirectory + "/www/enum.html";
+        String url = "file://" + projectDirectory + "/src/main/webapp/enum.html";
         call(url);
     }
 
@@ -20,12 +20,12 @@ public class CTutorEnumPage extends AbstractPage {
     }
 
     public EnumerationsPageCReference clickEnumLink2() {
-        clickLink("Dokumentation - C reference / enumerations");
+        clickLink();
         return new EnumerationsPageCReference(page);
     }
 
     public EnumerationsPageCReference clickEnumLink3() {
-        clickLinkByXPath("//a[. = 'Dokumentation - C reference / enumerations']");
+        clickLinkByXPath();
         return new EnumerationsPageCReference(page);
     }
 

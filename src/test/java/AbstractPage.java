@@ -27,17 +27,16 @@ public class AbstractPage {
 		page.click(id);
 	}
 
-	protected void clickLink(String linkText) {
-		page.click("text=" + linkText);
+	protected void clickLink() {
+		page.click("text=" + "Dokumentation - C reference / enumerations");
 	}
 
-	protected void clickLinkByXPath(String path) {
-		page.click("xpath=" + path);
+	protected void clickLinkByXPath() {
+		page.click("xpath=" + "//a[. = 'Dokumentation - C reference / enumerations']");
 	}
 
 	protected void typeText(String id, String text) {
-		ElementHandle input = (ElementHandle) page.locator(id);
-		input.fill(text);
+		page.locator(id).fill(text);
 	}
 
 	protected String getText(String id) {
@@ -61,8 +60,7 @@ public class AbstractPage {
 	}
 
 	protected String getInnerHTMLOfElementByID(String id) {
-		ElementHandle element = (ElementHandle) page.locator(id);
-		return element.innerHTML();
+        return page.innerHTML(id);
 	}
 
 	protected void selectComboboxItem(String id, String name) {
@@ -76,8 +74,7 @@ public class AbstractPage {
 	}
 
 	protected boolean isVisible(String id) {
-		ElementHandle element = (ElementHandle) page.locator(id);
-		return element.isVisible();
+        return page.isVisible(id);
 	}
 
 	protected void moveOverHTMLelement(String id) {
