@@ -196,7 +196,6 @@ public class CTutorEnumPageTester extends AbstractPlaywrightTester {
         page.waitForTimeout(1000);
 
         String actualCopiedText = (String) page.evaluate("() => { return navigator.clipboard.readText(); }");
-        System.out.println(actualCopiedText);
         String pattern = "^/\\*\\*.+" + enumName + ";$"; // starting with /** ending with enumName; DOTALL -> inclusive multilines
         Pattern p = Pattern.compile(pattern, Pattern.DOTALL);
         Matcher m = p.matcher(actualCopiedText);

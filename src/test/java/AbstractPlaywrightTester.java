@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.AfterAll;
 
-public class AbstractPlaywrightTester {
+public abstract class AbstractPlaywrightTester {
     protected static Playwright playwright;
 	protected static Browser browser;
 
